@@ -22,3 +22,5 @@ Parameters:
 Algorithms:
    3DES, AES-128 (Default), AES-192, AES-256, DES, RC2, RC4
 </pre>
+
+https://sourceforge.net/projects/encryptcli/
