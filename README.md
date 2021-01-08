@@ -1,5 +1,5 @@
 # EncryptCLI
-Command-line File Encrypter written in AutoIt3
+Command-line File Encryptor written in AutoIt3
 
 <pre>
 File Encryption Tool - ALBANESE Lab © 2018-2020
