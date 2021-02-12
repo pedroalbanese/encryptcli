@@ -79,3 +79,4 @@ Func StringEncrypt($bEncrypt, $sData, $sPassword)
 	_Crypt_Shutdown() ; Shutdown the Crypt library.
 	Return $vReturn
 EndFunc   ;==>StringEncrypt
+
