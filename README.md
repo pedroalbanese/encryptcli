@@ -2,8 +2,6 @@
 Command-line File Encryption Tool written in AutoIt3
 
 <pre>
-File Encryption Tool - ALBANESE Lab © 2018-2020
-
 Usage: 
    EncryptCLI.exe -e|d --in &lt;file.ext&gt; --alg &lt;algorithm&gt; --psw &lt;password&gt;
 
@@ -22,3 +20,6 @@ Parameters:
 Algorithms:
    3DES, AES-128 (Default), AES-192, AES-256, DES, RC2, RC4
 </pre>
+
+## License
+This project is licensed under the ISC License.
