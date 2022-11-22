@@ -21,7 +21,7 @@ _Crypt_Startup()
 
 If not StringInStr($CmdLineRaw, "in") or not StringInStr($CmdLineRaw, "key") or  $CmdLineRaw == "" Then
    ConsoleWrite("Advanced Encryption Standard Tool - ALBANESE Research Lab " & Chr(184) & " 2017-2023" & @CRLF);
-   ConsoleWrite("Usage: " & @ScriptName & " -e|d --in <file.ext> --alg <algorithm> --key <key>" & @CRLF & @CRLF);
+   ConsoleWrite("Usage: " & @CRLF & '   ' & @ScriptName & " -e|d --in <file.ext> --alg <algorithm> --key <key>" & @CRLF & @CRLF);
    ConsoleWrite("Commands: " & @CRLF);
    ConsoleWrite("   -e: Encrypt " & @CRLF);
    ConsoleWrite("   -d: Decrypt" & @CRLF & @CRLF);
