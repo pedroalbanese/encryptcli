@@ -1,4 +1,4 @@
-# EncryptCLI
+# EncryptCLI+GUI
 [![ISC License](http://img.shields.io/badge/license-ISC-blue.svg)](https://github.com/pedroalbanese/encryptcli/blob/master/LICENSE.md) 
 [![GitHub downloads](https://img.shields.io/github/downloads/pedroalbanese/encryptcli/total.svg?logo=github&logoColor=white)](https://github.com/pedroalbanese/encryptcli/releases)
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/pedroalbanese/encryptcli)](https://github.com/pedroalbanese/encryptcli/releases)
