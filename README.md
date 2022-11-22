@@ -6,7 +6,7 @@
 
 <pre>
 Advanced Encryption Standard Tool - ALBANESE Research Lab © 2017-2023
-Usage: EncryptCLI.exe -e|d --in <file.ext> --alg <algorithm> --key <key>
+Usage: EncryptCLI.exe -e|d --in &lt;file.ext&gt; --alg &lt;algorithm&gt; --key &lt;key&gt;
 
 Commands:
    -e: Encrypt
