@@ -5,7 +5,7 @@
 #### Command-line File Encryption Tool written in AutoIt3
 
 <pre>Usage:
-   EncryptCLI.exe -e|d --in <file.ext> --alg <algorithm> --key <key>
+   EncryptCLI.exe -e|d --in &lt;file.ext&gt; --alg &lt;algorithm&gt; --key &lt;key&gt;
 
 Commands:
    -e: Encrypt
