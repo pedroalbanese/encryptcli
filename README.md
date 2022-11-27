@@ -6,7 +6,9 @@
 
 <pre>
 Advanced Encryption Standard Tool - ALBANESE Research Lab © 2017-2023
-Usage: EncryptCLI.exe -e|d --in &lt;file.ext&gt; --alg &lt;algorithm&gt; --key &lt;key&gt;
+
+Usage:
+   EncryptCLI.exe -e|d --in <file.ext> --alg <algorithm> --key <key>
 
 Commands:
    -e: Encrypt
@@ -16,7 +18,7 @@ Parameters:
    /alg: Algorithm
    /in : Input file
    /out: Output file (Optional [*])
-   /key: Symmettric key
+   /key: Symmetric key
 
    [*] If no output is specified, the input file will be overwritten.
 
