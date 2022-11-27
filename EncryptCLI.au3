@@ -20,7 +20,7 @@ Global Const $CRYPT_MODE_CBC = 2
 _Crypt_Startup()
 
 If not StringInStr($CmdLineRaw, "in") or not StringInStr($CmdLineRaw, "key") or  $CmdLineRaw == "" Then
-   ConsoleWrite("Advanced Encryption Standard Tool - ALBANESE Research Lab " & Chr(184) & " 2017-2023" & @CRLF);
+   ConsoleWrite("Advanced Encryption Standard Tool - ALBANESE Research Lab " & Chr(184) & " 2017-2023" & @CRLF & @CRLF);
    ConsoleWrite("Usage: " & @CRLF & '   ' & @ScriptName & " -e|d --in <file.ext> --alg <algorithm> --key <key>" & @CRLF & @CRLF);
    ConsoleWrite("Commands: " & @CRLF);
    ConsoleWrite("   -e: Encrypt " & @CRLF);
@@ -29,7 +29,7 @@ If not StringInStr($CmdLineRaw, "in") or not StringInStr($CmdLineRaw, "key") or 
    ConsoleWrite("   /alg: Algorithm" & @CRLF);
    ConsoleWrite("   /in : Input file" & @CRLF);
    ConsoleWrite("   /out: Output file (Optional [*])" & @CRLF);
-   ConsoleWrite("   /key: Symmettric key" & @CRLF & @CRLF);
+   ConsoleWrite("   /key: Symmetric key" & @CRLF & @CRLF);
    ConsoleWrite("   [*] If no output is specified, the input file will be overwritten." & @CRLF & @CRLF);
    ConsoleWrite("Algorithms:" & @CRLF);
    ConsoleWrite("   3DES, AES-128 (Default), AES-192, AES-256, DES, RC2, RC4" & @CRLF);
