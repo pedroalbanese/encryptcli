@@ -4,10 +4,7 @@
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/pedroalbanese/encryptcli)](https://github.com/pedroalbanese/encryptcli/releases)
 #### Command-line File Encryption Tool written in AutoIt3
 
-<pre>
-Advanced Encryption Standard Tool - ALBANESE Research Lab © 2017-2023
-
-Usage:
+<pre>Usage:
    EncryptCLI.exe -e|d --in <file.ext> --alg <algorithm> --key <key>
 
 Commands:
@@ -23,8 +20,7 @@ Parameters:
    [*] If no output is specified, the input file will be overwritten.
 
 Algorithms:
-   3DES, AES-128 (Default), AES-192, AES-256, DES, RC2, RC4
-</pre>
+   3DES, AES-128 (Default), AES-192, AES-256, DES, RC2, RC4</pre>
 
 ## License
 
