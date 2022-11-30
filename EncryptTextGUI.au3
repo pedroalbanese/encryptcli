@@ -22,6 +22,8 @@
 #include <StaticConstants.au3>
 #include <Crypt.au3>
 
+#include <B64UFD.au3>
+
 Global Const $KP_MODE = 4
 Global Const $CRYPT_MODE_CBC = 2
 
@@ -103,8 +105,8 @@ While 1
 			$key = _Crypt_ImportKey($iAlgorithm, $key)
 			_Crypt_SetKeyParam($key, $KP_MODE, $CRYPT_MODE_CBC)
 			; Calls the encryption. Sets the data of editbox with the encrypted string
-			$dEncrypted = _Crypt_EncryptData(GUICtrlRead($idEditText), $key, $CALG_USERKEY)     ; Encrypt the text with the new cryptographic key.
-			GUICtrlSetData($idEditText, StringReplace($dEncrypted, "0x", ""))
+			$dEncrypted = base64(_Crypt_EncryptData(GUICtrlRead($idEditText), $key, $CALG_USERKEY), true)     ; Encrypt the text with the new cryptographic key.
+			GUICtrlSetData($idEditText, StringReplace($dEncrypted, @LF, @CRLF))
 			_Crypt_DestroyKey($key)
 			_Crypt_Shutdown()
 
@@ -119,12 +121,8 @@ While 1
 			$key = _Crypt_ImportKey($iAlgorithm, $key)
 			_Crypt_SetKeyParam($key, $KP_MODE, $CRYPT_MODE_CBC)
 			; Calls the decryption. Sets the data of editbox with the decrypted string
-			$dDecrypted = _Crypt_DecryptData('0x' & StringReplace(GUICtrlRead($idEditText), @CRLF, ""), $key, $CALG_USERKEY)     ; Decrypt the data using the generic password string. The return value is a binary string.
-			If _HexToString($dDecrypted) = "0x-1" Then
-				GUICtrlSetData($idEditText, "Bad decrypt.")
-			Else
-				GUICtrlSetData($idEditText, _HexToString($dDecrypted))
-			EndIf
+			$dDecrypted = _Crypt_DecryptData(base64(GUICtrlRead($idEditText), False), $key, $CALG_USERKEY)     ; Decrypt the data using the generic password string. The return value is a binary string.
+			GUICtrlSetData($idEditText, BinaryToString($dDecrypted))
 			_Crypt_DestroyKey($key)
 			_Crypt_Shutdown()
        Case $hSelAll
