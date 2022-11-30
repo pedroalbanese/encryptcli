@@ -28,7 +28,8 @@ Main()
 
 Func Main()
 	$iAlgorithm = $CALG_AES_128
-	Local $hGUI = GUICreate('AES File Crypter 1.0 - ALBANESE Research Lab ' & Chr(169) & ' 2016-2023', 490, 100)
+	$keySize = 16
+	Local $hGUI = GUICreate('AES File Crypter 1.0 - ALBANESE Research Lab ' & Chr(169) & ' 2017-2023', 490, 100)
 	GUISetFont(9, 400, 1, "Consolas")
 	Local $idSourceInput = GUICtrlCreateInput("", 5, 5, 400, 20)
 	Local $idSourceBrowse = GUICtrlCreateButton("...", 410, 5, 35, 20)
@@ -37,7 +38,7 @@ Func Main()
 	Local $idDestinationBrowse = GUICtrlCreateButton("...", 410, 30, 35, 20)
 
 	GUICtrlCreateLabel("Key:", 5, 55, 200, 20)
-	Local $idPasswordInput = GUICtrlCreateInput("", 5, 70, 225, 20, $ES_PASSWORD)
+	Local $idPasswordInput = GUICtrlCreateInput("", 5, 70, 225, 20)
 
 	Local $idCombo = GUICtrlCreateCombo("", 235, 70, 100, 20, $CBS_DROPDOWNLIST)
 	GUICtrlSetData($idCombo, "3DES (192bit)|AES (128bit)|AES (192bit)|AES (256bit)|DES (64bit)|RC2 (128bit)|RC4 (128bit)", "AES (128bit)")
@@ -56,18 +57,25 @@ Func Main()
 				Switch GUICtrlRead($idCombo) ; Read the combobox selection.
 					Case "3DES (168bit)"
 						$iAlgorithm = $CALG_3DES
+						$keySize = 24
 					Case "AES (128bit)"
 						$iAlgorithm = $CALG_AES_128
+						$keySize = 16
 					Case "AES (192bit)"
 						$iAlgorithm = $CALG_AES_192
+						$keySize = 24
 					Case "AES (256bit)"
 						$iAlgorithm = $CALG_AES_256
+						$keySize = 32
 					Case "DES (64bit)"
 						$iAlgorithm = $CALG_DES
+						$keySize = 8
 					Case "RC2 (128bit)"
 						$iAlgorithm = $CALG_RC2
+						$keySize = 16
 					Case "RC4 (128bit)"
 						$iAlgorithm = $CALG_RC4
+						$keySize = 16
 				EndSwitch
 
 			Case $idSourceBrowse
@@ -89,6 +97,10 @@ Func Main()
 				$sDestinationRead = GUICtrlRead($idDestinationInput) ; Read the destination filepath input.
 				$sPasswordRead = GUICtrlRead($idPasswordInput) ; Read the password input.
 				$key = $sPasswordRead
+				If StringLen($key) <> $keySize Then
+					MsgBox($MB_SYSTEMMODAL, "", GUICtrlRead($idCombo) & " key must be " & $keySize & "-byte long.")
+					ContinueLoop
+				EndIf
 				_Crypt_Startup()
 				$key = _Crypt_ImportKey($iAlgorithm, $key)
 				_Crypt_SetKeyParam($key, $KP_MODE, $CRYPT_MODE_CBC)
@@ -108,6 +120,10 @@ Func Main()
 				$sDestinationRead = GUICtrlRead($idDestinationInput) ; Read the destination filepath input.
 				$sPasswordRead = GUICtrlRead($idPasswordInput) ; Read the password input.
 				$key = $sPasswordRead
+				If StringLen($key) <> $keySize Then
+					MsgBox($MB_SYSTEMMODAL, "", GUICtrlRead($idCombo) & " key must be " & $keySize & "-byte long.")
+					ContinueLoop
+				EndIf
 				_Crypt_Startup()
 				$key = _Crypt_ImportKey($iAlgorithm, $key)
 				_Crypt_SetKeyParam($key, $KP_MODE, $CRYPT_MODE_CBC)

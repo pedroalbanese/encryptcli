@@ -35,7 +35,7 @@ Local $idEditText = GUICtrlCreateEdit('', 5, 5, 580, 350, $ES_AUTOVSCROLL + $WS_
 GUICtrlSetState($idEditText, $GUI_DROPACCEPTED)
 
 ; Creates the key box with blured/centered input
-Local $idInputPass = GUICtrlCreateInput('', 5, 360, 250, 20, $ES_PASSWORD)
+Local $idInputPass = GUICtrlCreateInput('', 5, 360, 250, 20)
 GUICtrlSetState($idInputPass, $GUI_DROPACCEPTED)
 
 ; Cretae the combo to select the crypting algorithm
@@ -60,6 +60,7 @@ GUISetAccelerators($AccelKeys)
 
 Local $iAlgorithm = $CALG_AES_128
 Local $dEncrypted
+Local $keySize = "16"
 
 While 1
 	Switch GUIGetMsg()
@@ -70,24 +71,35 @@ While 1
 			Switch GUICtrlRead($idCombo) ; Read the combobox selection.
 				Case "3DES"
 					$iAlgorithm = $CALG_3DES
+					$keySize = "24"
 				Case "AES (128bit)"
 					$iAlgorithm = $CALG_AES_128
+					$keySize = "16"
 				Case "AES (192bit)"
 					$iAlgorithm = $CALG_AES_192
+					$keySize = "24"
 				Case "AES (256bit)"
 					$iAlgorithm = $CALG_AES_256
+					$keySize = "32"
 				Case "DES"
 					$iAlgorithm = $CALG_DES
+					$keySize = "8"
 				Case "RC2"
 					$iAlgorithm = $CALG_RC2
+					$keySize = "16"
 				Case "RC4"
 					$iAlgorithm = $CALG_RC4
+					$keySize = "16"
 				EndSwitch
 
 		Case $idEncryptButton
 			; When you press Encrypt
 			_Crypt_Startup()
 			$key = GUICtrlRead($idInputPass)
+			If StringLen($key) <> $keySize Then
+				MsgBox($MB_SYSTEMMODAL, "", GUICtrlRead($idCombo) & " key must be " & $keySize & "-byte long.")
+				ContinueLoop
+			EndIf
 			$key = _Crypt_ImportKey($iAlgorithm, $key)
 			_Crypt_SetKeyParam($key, $KP_MODE, $CRYPT_MODE_CBC)
 			; Calls the encryption. Sets the data of editbox with the encrypted string
@@ -100,6 +112,10 @@ While 1
 			; When you press Decrypt
 			_Crypt_Startup()
 			$key = GUICtrlRead($idInputPass)
+			If StringLen($key) <> $keySize Then
+				MsgBox($MB_SYSTEMMODAL, "", GUICtrlRead($idCombo) & " key must be " & $keySize & "-byte long.")
+				ContinueLoop
+			EndIf
 			$key = _Crypt_ImportKey($iAlgorithm, $key)
 			_Crypt_SetKeyParam($key, $KP_MODE, $CRYPT_MODE_CBC)
 			; Calls the decryption. Sets the data of editbox with the decrypted string

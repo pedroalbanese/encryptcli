@@ -17,6 +17,8 @@
 Global Const $KP_MODE = 4
 Global Const $CRYPT_MODE_CBC = 2
 
+Local $algo = "AES-128"
+
 _Crypt_Startup()
 
 If not StringInStr($CmdLineRaw, "in") or not StringInStr($CmdLineRaw, "key") or  $CmdLineRaw == "" Then
@@ -39,28 +41,41 @@ Else
    Local $algo = _CmdLine_Get('alg')
 	  If $algo = "3DES" Then
 		 $alg = $CALG_3DES
+		 $keySize = 24
       ElseIf $algo = "AES-128" Then
 		 $alg = $CALG_AES_128
+		 $keySize = 16
       ElseIf $algo = "AES-192" Then
 		 $alg = $CALG_AES_192
+		 $keySize = 24
 	  ElseIf $algo = "AES-256" Then
 		 $alg = $CALG_AES_256
+		 $keySize = 32
       ElseIf $algo = "DES" Then
 		 $alg = $CALG_DES
+		 $keySize = 8
       ElseIf $algo = "RC2" Then
 		 $alg = $CALG_RC2
+		 $keySize = 16
 	  ElseIf $algo = "RC4" Then
 		 $alg = $CALG_RC4
+		 $keySize = 16
 	  Else
 	   ConsoleWrite("Error: Unknown Algorithm." & @CRLF);
        Exit
 	  Endif
-  Else
-   $alg = $CALG_AES_128
+	Else
+    $alg = $CALG_AES_128
+	$keySize = 16
   Endif
    Local $file = _CmdLine_Get('in')
    Local $file2 = _CmdLine_Get('out')
    Local $key = _CmdLine_Get('key')
+EndIf
+
+If StringLen($key) <> $keySize Then
+	ConsoleWrite($algo  & " key must be " & $keySize & "-byte long.")
+	Exit (1)
 EndIf
 
 If _CmdLine_KeyExists('out') Then
@@ -80,7 +95,7 @@ If FileExists($file) Then
 			FileWrite($outfile, StringEncrypt(True, $full, $key))
 		ElseIf $CmdLine[1] == "-d" Then
 			_Crypt_Startup()
-			$key = _Crypt_ImportKey($alg, $psw)
+			$key = _Crypt_ImportKey($alg, $key)
 			_Crypt_SetKeyParam($key, $KP_MODE, $CRYPT_MODE_CBC)
 			FileOpen($outfile, 2)
 			FileWrite($outfile, StringEncrypt(False, $full, $key))
