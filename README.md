@@ -22,8 +22,15 @@ Parameters:
 Algorithms:
    3DES, AES-128 (Default), AES-192, AES-256, DES, RC2, RC4</pre>
 
+## GUI
+
+![AES File Crypter screenshot](https://github.com/pedroalbanese/encryptcli/assets/415502/2ba0834d-0a4f-4390-ae94-5117e599397b)
+
 ## License
 
 This project is licensed under the ISC License.
 
 #### Copyright (c) 2016-2022 Pedro F. Albanese - ALBANESE Research Lab.
+
+## See also
+[List of cryptography GUI tools](https://gist.github.com/stokito/eea7ee50d51e1db30122e2e33a62723e)
