@@ -21,60 +21,60 @@ Local $algo = "AES-128"
 
 _Crypt_Startup()
 
-If not StringInStr($CmdLineRaw, "in") or not StringInStr($CmdLineRaw, "key") or  $CmdLineRaw == "" Then
-   ConsoleWrite("Advanced Encryption Standard Tool - ALBANESE Research Lab " & Chr(184) & " 2017-2023" & @CRLF & @CRLF);
-   ConsoleWrite("Usage: " & @CRLF & '   ' & @ScriptName & " -e|d --in <file.ext> --alg <algorithm> --key <key>" & @CRLF & @CRLF);
-   ConsoleWrite("Commands: " & @CRLF);
-   ConsoleWrite("   -e: Encrypt " & @CRLF);
-   ConsoleWrite("   -d: Decrypt" & @CRLF & @CRLF);
-   ConsoleWrite("Parameters: " & @CRLF);
-   ConsoleWrite("   /alg: Algorithm" & @CRLF);
-   ConsoleWrite("   /in : Input file" & @CRLF);
-   ConsoleWrite("   /out: Output file (Optional [*])" & @CRLF);
-   ConsoleWrite("   /key: Symmetric key" & @CRLF & @CRLF);
-   ConsoleWrite("   [*] If no output is specified, the input file will be overwritten." & @CRLF & @CRLF);
-   ConsoleWrite("Algorithms:" & @CRLF);
-   ConsoleWrite("   3DES, AES-128 (Default), AES-192, AES-256, DES, RC2, RC4" & @CRLF);
-   Exit
+If Not StringInStr($CmdLineRaw, "in") Or Not StringInStr($CmdLineRaw, "key") Or $CmdLineRaw == "" Then
+	ConsoleWrite("Advanced Encryption Standard Tool - ALBANESE Research Lab " & Chr(184) & " 2017-2023" & @CRLF & @CRLF) ;
+	ConsoleWrite("Usage: " & @CRLF & '   ' & @ScriptName & " -e|d --in <file.ext> --alg <algorithm> --key <key>" & @CRLF & @CRLF) ;
+	ConsoleWrite("Commands: " & @CRLF) ;
+	ConsoleWrite("   -e: Encrypt " & @CRLF) ;
+	ConsoleWrite("   -d: Decrypt" & @CRLF & @CRLF) ;
+	ConsoleWrite("Parameters: " & @CRLF) ;
+	ConsoleWrite("   /alg: Algorithm" & @CRLF) ;
+	ConsoleWrite("   /in : Input file" & @CRLF) ;
+	ConsoleWrite("   /out: Output file (Optional [*])" & @CRLF) ;
+	ConsoleWrite("   /key: Symmetric key" & @CRLF & @CRLF) ;
+	ConsoleWrite("   [*] If no output is specified, the input file will be overwritten." & @CRLF & @CRLF) ;
+	ConsoleWrite("Algorithms:" & @CRLF) ;
+	ConsoleWrite("   3DES, AES-128 (Default), AES-192, AES-256, DES, RC2, RC4" & @CRLF) ;
+	Exit
 Else
-   If _CmdLine_KeyExists('alg') Then
-   Local $algo = _CmdLine_Get('alg')
-	  If $algo = "3DES" Then
-		 $alg = $CALG_3DES
-		 $keySize = 24
-      ElseIf $algo = "AES-128" Then
-		 $alg = $CALG_AES_128
-		 $keySize = 16
-      ElseIf $algo = "AES-192" Then
-		 $alg = $CALG_AES_192
-		 $keySize = 24
-	  ElseIf $algo = "AES-256" Then
-		 $alg = $CALG_AES_256
-		 $keySize = 32
-      ElseIf $algo = "DES" Then
-		 $alg = $CALG_DES
-		 $keySize = 8
-      ElseIf $algo = "RC2" Then
-		 $alg = $CALG_RC2
-		 $keySize = 16
-	  ElseIf $algo = "RC4" Then
-		 $alg = $CALG_RC4
-		 $keySize = 16
-	  Else
-	   ConsoleWrite("Error: Unknown Algorithm." & @CRLF);
-       Exit
-	  Endif
+	If _CmdLine_KeyExists('alg') Then
+		Local $algo = _CmdLine_Get('alg')
+		If $algo = "3DES" Then
+			$alg = $CALG_3DES
+			$keySize = 24
+		ElseIf $algo = "AES-128" Then
+			$alg = $CALG_AES_128
+			$keySize = 16
+		ElseIf $algo = "AES-192" Then
+			$alg = $CALG_AES_192
+			$keySize = 24
+		ElseIf $algo = "AES-256" Then
+			$alg = $CALG_AES_256
+			$keySize = 32
+		ElseIf $algo = "DES" Then
+			$alg = $CALG_DES
+			$keySize = 8
+		ElseIf $algo = "RC2" Then
+			$alg = $CALG_RC2
+			$keySize = 16
+		ElseIf $algo = "RC4" Then
+			$alg = $CALG_RC4
+			$keySize = 16
+		Else
+			ConsoleWrite("Error: Unknown Algorithm." & @CRLF) ;
+			Exit
+		EndIf
 	Else
-    $alg = $CALG_AES_128
-	$keySize = 16
-  Endif
-   Local $file = _CmdLine_Get('in')
-   Local $file2 = _CmdLine_Get('out')
-   Local $key = _CmdLine_Get('key')
+		$alg = $CALG_AES_128
+		$keySize = 16
+	EndIf
+	Local $file = _CmdLine_Get('in')
+	Local $file2 = _CmdLine_Get('out')
+	Local $key = _CmdLine_Get('key')
 EndIf
 
 If StringLen($key) <> $keySize Then
-	ConsoleWrite($algo  & " key must be " & $keySize & "-byte long.")
+	ConsoleWrite($algo & " key must be " & $keySize & "-byte long.")
 	Exit (1)
 EndIf
 
